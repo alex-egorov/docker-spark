@@ -27,5 +27,5 @@ docker_push:
 	docker push $(DOCKER_IMAGE):$(DOCKER_TAG)
 
 docker_test:
-	docker run -e NAMENODE=spark -e MASTER=spark --hostname spark --name spark_test $(DOCKER_IMAGE):$(DOCKER_TAG) $(TEST_COMMAND)
+	#docker run $(DOCKER_IMAGE):$(DOCKER_TAG) $(TEST_COMMAND)
 
