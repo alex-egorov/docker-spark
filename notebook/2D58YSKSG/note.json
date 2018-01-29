@@ -1,0 +1,81 @@
+{
+  "paragraphs": [
+    {
+      "text": "%spark\nval data \u003d sc.wholeTextFiles(\"hdfs://spark:9000/wordcount/\")\n\nval files \u003d data.map { case (filename, content) \u003d\u003e filename}\n\n\ndef doSomething(file: String) \u003d { \n\n println (file);\n\n // your logic of processing a single file comes here\n\n val logData \u003d sc.textFile(file);\n val numAs \u003d logData.filter(line \u003d\u003e line.contains(\"a\")).count();\n println(\"Lines with a: %s\".format(numAs));\n\n // save rdd of single file processed data to hdfs  comes here\n\n}\n\nfiles.collect.foreach( filename \u003d\u003e {\n    doSomething(filename)\n\n}) ",
+      "user": "anonymous",
+      "dateUpdated": "Jan 23, 2018 4:19:35 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "data: org.apache.spark.rdd.RDD[(String, String)] \u003d hdfs://spark:9000/wordcount/ MapPartitionsRDD[28] at wholeTextFiles at \u003cconsole\u003e:28\nfiles: org.apache.spark.rdd.RDD[String] \u003d MapPartitionsRDD[29] at map at \u003cconsole\u003e:31\ndoSomething: (file: String)Unit\nhdfs://spark:9000/wordcount/arabian_nights.txt\nLines with a: 9387\nhdfs://spark:9000/wordcount/crime_and_punishment.txt\nLines with a: 17429\nhdfs://spark:9000/wordcount/hello_world.txt\nLines with a: 0\nhdfs://spark:9000/wordcount/youth.txt\nLines with a: 1216\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1516723479395_305402386",
+      "id": "20180123-160439_1493486794",
+      "dateCreated": "Jan 23, 2018 4:04:39 PM",
+      "dateStarted": "Jan 23, 2018 4:19:35 PM",
+      "dateFinished": "Jan 23, 2018 4:19:36 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n",
+      "user": "anonymous",
+      "dateUpdated": "Jan 23, 2018 4:04:50 PM",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1516723490724_1914437611",
+      "id": "20180123-160450_1566482910",
+      "dateCreated": "Jan 23, 2018 4:04:50 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "PopularTweets",
+  "id": "2D58YSKSG",
+  "angularObjects": {
+    "2D4D8V9ZF:shared_process": [],
+    "2D5NGFYPG:shared_process": [],
+    "2D6N1MZSF:shared_process": [],
+    "2D3YQVFM7:shared_process": [],
+    "2D3PNBYND:shared_process": [],
+    "2D44DREXC:shared_process": [],
+    "2D5GR6CYS:shared_process": [],
+    "2D6YYVZTT:shared_process": [],
+    "2D5TGPEY6:shared_process": [],
+    "2D5VRN2CB:shared_process": [],
+    "2D5DGFXBB:shared_process": [],
+    "2D5Y2U6P9:shared_process": [],
+    "2D7CS9AXP:shared_process": [],
+    "2D5SXM7BS:shared_process": [],
+    "2D76YT7J4:shared_process": [],
+    "2D5SBYDKD:shared_process": [],
+    "2D4ABU8G1:shared_process": [],
+    "2D52RN6NZ:shared_process": [],
+    "2D461JXS7:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}

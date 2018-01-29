@@ -1,0 +1,89 @@
+{
+  "paragraphs": [
+    {
+      "text": "%spark\nimport org.apache.spark.SparkConf\nimport org.apache.spark.SparkContext\n\nobject PrimesExample {\n  def isPrime(number: Int) : Boolean \u003d {\n    val sqrtOfNumber \u003d math.sqrt(number).toInt\n    val hasFactorsOtherThan1AndItself \u003d\n      (2 to sqrtOfNumber).exists { i \u003d\u003e number % i \u003d\u003d 0 }\n    number \u003e 1 \u0026\u0026 !hasFactorsOtherThan1AndItself\n  }\n\n  def main(args: Array[String]) {\n    val conf \u003d new SparkConf().setAppName(\"Spark Primes Example\")\n    val sc \u003d new SparkContext(conf)\n\n    val setSize \u003d if (args.length \u003e 0) args(0).toInt else 100000\n    val data \u003d 1 to setSize.toInt\n\n    val distData \u003d sc.parallelize(data)\n    val primes \u003d distData.filter(isPrime).collect()\n\n    primes.foreach(Console print _ + \" \")\n    println\n\n    sc.stop()\n  }\n}",
+      "user": "anonymous",
+      "dateUpdated": "Jan 20, 2018 7:38:57 PM",
+      "config": {
+        "colWidth": 12.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 457.0,
+              "optionOpen": false
+            }
+          }
+        },
+        "editorSetting": {
+          "language": "scala"
+        },
+        "editorMode": "ace/mode/scala",
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.SparkConf\nimport org.apache.spark.SparkContext\ndefined object PrimesExample\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1516477102221_1547708340",
+      "id": "20180120-193822_794314341",
+      "dateCreated": "Jan 20, 2018 7:38:22 PM",
+      "dateStarted": "Jan 20, 2018 7:38:37 PM",
+      "dateFinished": "Jan 20, 2018 7:38:39 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%spark\n",
+      "user": "anonymous",
+      "dateUpdated": "Jan 20, 2018 7:38:25 PM",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "jobName": "paragraph_1516477105419_-15511117",
+      "id": "20180120-193825_1888222239",
+      "dateCreated": "Jan 20, 2018 7:38:25 PM",
+      "status": "READY",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "PromeNumbers2",
+  "id": "2D3WDVDN3",
+  "angularObjects": {
+    "2D5FWJXUM:shared_process": [],
+    "2D6JD9VY6:shared_process": [],
+    "2D6QR621Y:shared_process": [],
+    "2D4R9UCWQ:shared_process": [],
+    "2D3YG2QH8:shared_process": [],
+    "2D7536WRY:shared_process": [],
+    "2D6RM7Q4Q:shared_process": [],
+    "2D7B8WPV3:shared_process": [],
+    "2D6PX1YHR:shared_process": [],
+    "2D42PTNYS:shared_process": [],
+    "2D63DN7PW:shared_process": [],
+    "2D5X5ZMUW:shared_process": [],
+    "2D5KP8Z99:shared_process": [],
+    "2D6WPN2A7:shared_process": [],
+    "2D6CRFGCT:shared_process": [],
+    "2D6HWJFWP:shared_process": [],
+    "2D72KZ1TM:shared_process": [],
+    "2D3BQEYWM:shared_process": [],
+    "2D3WWJ8GK:shared_process": []
+  },
+  "config": {},
+  "info": {}
+}

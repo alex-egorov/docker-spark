@@ -1,0 +1,106 @@
+#masternode:
+#  image: alex202/hadoop
+#  container_name: masternode
+#  hostname: masternode
+#  environment:
+#    - NAMENODE=masternode
+#  ports:
+#    - "8042:8042"
+#    - "8088:8088"
+#    - "9000:9000"
+#    - "50090:50090"
+#    - "50075:50075"
+#
+#datanode01:
+#  image: alex202/hadoop
+#  container_name: datanode01
+#  links:
+#    - "masternode:masternode"
+#  hostname: datanode01
+#  environment:
+#    - NAMENODE=masternode
+#
+#datanode02:
+#  image: alex202/hadoop
+#  container_name: datanode02
+#  links:
+#    - "masternode:masternode"
+#  hostname: datanode02
+#  environment:
+#    - NAMENODE=masternode
+#
+#datanode03:
+#  image: alex202/hadoop
+#  container_name: datanode03
+#  links:
+#    - "masternode:masternode"
+#  hostname: datanode03
+#  environment:
+#    - NAMENODE=masternode
+
+spark:
+  image: alex202/spark
+  container_name: spark
+  #links:
+  #  - "masternode:masternode"
+  ports:
+    - "4040:4040"
+    - "50070:50070"
+    - "8080:8080"
+  hostname: spark
+  environment:
+    - NAMENODE=spark
+    - MASTER=spark
+  #command: "/opt/spark/bin/spark-class org.apache.spark.deploy.master.Master --ip spark --port 7077 --webui-port 8080"
+
+worker01:
+  image: alex202/spark
+  container_name: worker01
+  links:
+    - "spark:spark"
+  ports:
+    - "8081:4040"
+  environment:
+    - NAMENODE=spark
+    - MASTER=spark
+  hostname: worker01
+  #command: "/opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark:7077 --webui-port 8081"
+
+worker02:
+  image: alex202/spark
+  container_name: worker02
+  links:
+    - "spark:spark"
+  ports:
+    - "8082:4040"
+  environment:
+    - NAMENODE=spark
+    - MASTER=spark
+  hostname: worker02
+  #command: "/opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark:7077 --webui-port 8082"
+
+worker03:
+  image: alex202/spark
+  container_name: worker03
+  links:
+    - "spark:spark"
+  ports:
+    - "8083:4040"
+  environment:
+    - NAMENODE=spark
+    - MASTER=spark
+  hostname: worker03
+  command: "/opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark:7077 --webui-port 8083"
+
+zeppelin:
+  image: alex202/zeppelin
+  container_name: zeppelin
+  links:
+    - "spark:spark"
+  ports:
+    - "8000:8080"
+  hostname: zeppelin
+  environment:
+    - MASTER=spark
+  volumes:
+   - "./notebook:/opt/zeppelin/notebook"
